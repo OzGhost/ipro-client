@@ -28,7 +28,6 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-browserify');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   grunt.registerTask('default', ['sass', 'browserify']);
   grunt.file.copy('src/index.html', 'dsc/index.html');
