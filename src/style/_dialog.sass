@@ -1,0 +1,47 @@
+@import constant
+
+.dialog
+  display: block
+  position: absolute
+  z-index: 5
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  margin: 0
+  padding: 0
+
+  .dialog-ground
+    display: block
+    position: absolute
+    z-index: 4
+    background-color: $c-grey
+    opacity: .7
+    width: 100%
+    height: 100%
+
+  .dialog-content
+    padding: $gap-normal
+    background-color: white
+    position: absolute
+    top: $gap-normal
+    left: $gap-normal
+    z-index: 6
+    width: calc(100% - #{$gap-normal*4})
+
+  .dialog-close
+    padding: $gap-tiny $gap-normal
+    position: absolute
+    top: 0
+    right: 0
+    cursor: pointer
+    font-size: $fs-large
+
+    &:hover
+      box-shadow: 0 0 $gap-tiny $c-grey
+      text-shadow: 2px 2px 2px $c-grey
+
+  .dialog-head
+    display: block
+    margin-bottom: $gap-tiny
+    font-size: $fs-large

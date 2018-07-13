@@ -1,0 +1,17 @@
+@import constant
+
+=stat-bar($bg, $fg)
+  .stat-bar
+    background: $bg
+    color: $fg
+
+.season
+  +stat-bar($c-green, $c-brown)
+
+.process
+  +stat-bar($c-red, white)
+
+.stat-bar
+  margin: $gap-normal 0
+  padding: $gap-tiny $gap-normal
+  font-size: $fs-small

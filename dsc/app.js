@@ -18057,6 +18057,524 @@ if (process.env.NODE_ENV === 'production') {
 
 }).call(this,require('_process'))
 },{"./cjs/react.development.js":24,"./cjs/react.production.min.js":25,"_process":18}],27:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Dialog = function (_React$Component) {
+  _inherits(Dialog, _React$Component);
+
+  function Dialog(props) {
+    _classCallCheck(this, Dialog);
+
+    var _this = _possibleConstructorReturn(this, (Dialog.__proto__ || Object.getPrototypeOf(Dialog)).call(this, props));
+
+    _this.state = {
+      data: Object.assign({}, props.info)
+    };
+    _this.changeBuffer = _this.changeBuffer.bind(_this);
+    _this.headTitle = _this.headTitle.bind(_this);
+    _this.getForm = _this.getForm.bind(_this);
+    _this.newTaskForm = _this.newTaskForm.bind(_this);
+    _this.nameTracking = _this.nameTracking.bind(_this);
+    _this.valueTracking = _this.valueTracking.bind(_this);
+    _this.typeTracking = _this.typeTracking.bind(_this);
+    _this.startDateTracking = _this.startDateTracking.bind(_this);
+    _this.durationTracking = _this.durationTracking.bind(_this);
+    _this.detailTracking = _this.detailTracking.bind(_this);
+    _this.mainForm = _this.mainForm.bind(_this);
+    return _this;
+  }
+
+  _createClass(Dialog, [{
+    key: 'changeBuffer',
+    value: function changeBuffer(event) {
+      var newVersion = Object.assign({}, this.state.data, { name: event.target.value });
+      this.setState({ data: newVersion });
+    }
+  }, {
+    key: 'headTitle',
+    value: function headTitle() {
+      var prefix, suffix;
+
+      prefix = this.props.info.id === -1 ? 'New ' : 'Edit ';
+      suffix = this.props.currentLevel === 1 ? ' Task' : '';
+      return prefix + this.props.type + suffix;
+    }
+  }, {
+    key: 'getForm',
+    value: function getForm() {
+      console.log(this.props.info);
+      console.log(this.props.currentLevel);
+      if (this.props.info.id === -1) {
+        if (this.props.currentLevel === 1) return this.newTaskForm();else return this.mainForm();
+      } else return this.mainForm();
+    }
+  }, {
+    key: 'newTaskForm',
+    value: function newTaskForm() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'div',
+          { className: 'ib' },
+          _react2.default.createElement(
+            'label',
+            null,
+            'Name:'
+          ),
+          _react2.default.createElement('input', { type: 'text', onChange: this.nameTracking })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ib' },
+          _react2.default.createElement(
+            'label',
+            null,
+            'Type:'
+          ),
+          _react2.default.createElement(
+            'select',
+            { onChange: this.typeTracking },
+            _react2.default.createElement(
+              'option',
+              { value: '1' },
+              'Repair'
+            ),
+            _react2.default.createElement(
+              'option',
+              { value: '2' },
+              'Planting'
+            ),
+            _react2.default.createElement(
+              'option',
+              { value: '3' },
+              'Harvest'
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ib' },
+          _react2.default.createElement(
+            'label',
+            null,
+            'Start day:'
+          ),
+          _react2.default.createElement('input', { type: 'number', onChange: this.startDateTracking })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ib' },
+          _react2.default.createElement(
+            'label',
+            null,
+            'Duration:'
+          ),
+          _react2.default.createElement('input', { type: 'number', onChange: this.durationTracking })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ib' },
+          _react2.default.createElement(
+            'label',
+            null,
+            'Detail:'
+          ),
+          _react2.default.createElement('textarea', { rows: '3', onChange: this.detailTracking })
+        )
+      );
+    }
+  }, {
+    key: 'nameTracking',
+    value: function nameTracking(event) {
+      this.valueTracking(event, 'name');
+    }
+  }, {
+    key: 'valueTracking',
+    value: function valueTracking(event, fieldName, isNumber) {
+      var data = Object.assign({}, this.state.data);
+      data[fieldName] = isNumber ? +event.target.value : event.target.value;
+      this.setState({ data: data });
+    }
+  }, {
+    key: 'typeTracking',
+    value: function typeTracking(event) {
+      var data = Object.assign({}, this.state.data);
+      data.type.id = +event.target.value;
+      this.setState({ data: data });
+    }
+  }, {
+    key: 'startDateTracking',
+    value: function startDateTracking(event) {
+      this.valueTracking(event, 'startDate', true);
+    }
+  }, {
+    key: 'durationTracking',
+    value: function durationTracking(event) {
+      this.valueTracking(event, 'duration', true);
+    }
+  }, {
+    key: 'detailTracking',
+    value: function detailTracking(event) {
+      this.valueTracking(event, 'detail');
+    }
+  }, {
+    key: 'mainForm',
+    value: function mainForm() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'div',
+          { className: 'ib' },
+          _react2.default.createElement(
+            'label',
+            null,
+            'Process Name:'
+          ),
+          _react2.default.createElement('input', { type: 'text', value: this.state.data.name,
+            onChange: this.changeBuffer })
+        )
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var head = this.headTitle();
+      var commit = function commit() {
+        _this2.props.commitCallBack(_this2.state.data);
+      };
+      var formCtx = this.getForm();
+      return _react2.default.createElement(
+        'div',
+        { className: 'dialog' },
+        _react2.default.createElement('div', { className: 'dialog-ground' }),
+        _react2.default.createElement(
+          'div',
+          { className: 'dialog-content' },
+          _react2.default.createElement(
+            'span',
+            { className: 'dialog-close', onClick: this.props.off },
+            '\xD7'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'dialog-head' },
+            head
+          ),
+          formCtx,
+          _react2.default.createElement(
+            'div',
+            { className: 'ib double-btn' },
+            _react2.default.createElement(
+              'button',
+              { className: 'btn-neutrality', onClick: this.props.off },
+              'Cancel'
+            ),
+            _react2.default.createElement(
+              'button',
+              { className: 'btn-positive', onClick: commit },
+              'Save'
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Dialog;
+}(_react2.default.Component);
+
+exports.default = Dialog;
+
+},{"react":26}],28:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Foot = function (_React$Component) {
+  _inherits(Foot, _React$Component);
+
+  function Foot(props) {
+    _classCallCheck(this, Foot);
+
+    var _this = _possibleConstructorReturn(this, (Foot.__proto__ || Object.getPrototypeOf(Foot)).call(this, props));
+
+    _this.getAdditionBtn = _this.getAdditionBtn.bind(_this);
+    return _this;
+  }
+
+  _createClass(Foot, [{
+    key: "getAdditionBtn",
+    value: function getAdditionBtn() {
+      return _react2.default.createElement(
+        "span",
+        null,
+        _react2.default.createElement(
+          "button",
+          { className: "btn-neutrality", onClick: this.props.back },
+          "Back"
+        ),
+        _react2.default.createElement(
+          "button",
+          { className: "btn-colorful",
+            onClick: this.props.im },
+          "Import"
+        ),
+        _react2.default.createElement(
+          "button",
+          { className: "btn-colorness",
+            onClick: this.props.ex },
+          "Export"
+        )
+      );
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var style, addition;
+      if (this.props.currentLevel === 1) {
+        style = 'double-double-btn';
+        addition = this.getAdditionBtn();
+      } else {
+        style = 'single-btn';
+      }
+      return _react2.default.createElement(
+        "div",
+        { className: style },
+        addition,
+        _react2.default.createElement(
+          "button",
+          { className: "btn-positive", onClick: this.props.dialogOn },
+          "Add"
+        )
+      );
+    }
+  }]);
+
+  return Foot;
+}(_react2.default.Component);
+
+exports.default = Foot;
+
+},{"react":26}],29:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Item = function (_React$Component) {
+  _inherits(Item, _React$Component);
+
+  function Item(props) {
+    _classCallCheck(this, Item);
+
+    var _this = _possibleConstructorReturn(this, (Item.__proto__ || Object.getPrototypeOf(Item)).call(this, props));
+
+    _this.state = {
+      more: false
+    };
+
+    _this.more = _this.more.bind(_this);
+    return _this;
+  }
+
+  _createClass(Item, [{
+    key: "more",
+    value: function more() {
+      var current = this.state.more;
+      this.setState({ more: !current });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var i = this.props.info;
+      var itemClasses = "item" + (this.state.more ? " open" : "");
+      var editFunc = function editFunc() {
+        _this2.props.eFunc(i.id);
+      };
+      var rmFunc = function rmFunc() {
+        _this2.props.rmFunc(i.id);
+      };
+      var loadFunc = function loadFunc(e) {
+        e.preventDefault();_this2.props.load(i.id);
+      };
+      return _react2.default.createElement(
+        "div",
+        { className: itemClasses },
+        _react2.default.createElement(
+          "div",
+          { className: "cname", onClick: loadFunc },
+          _react2.default.createElement(
+            "a",
+            { href: "#", className: "btn" },
+            i.name
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "more-opt", onClick: this.more },
+          _react2.default.createElement("span", { className: "tripple-dot" })
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "hidden-opt" },
+          _react2.default.createElement(
+            "button",
+            { className: "btn-negative", onClick: rmFunc },
+            "Remove"
+          ),
+          _react2.default.createElement(
+            "button",
+            { className: "btn-neutrality", onClick: editFunc },
+            "Edit"
+          )
+        )
+      );
+    }
+  }]);
+
+  return Item;
+}(_react2.default.Component);
+
+exports.default = Item;
+
+},{"react":26}],30:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Shipper = function () {
+  function Shipper(uri, rsType) {
+    _classCallCheck(this, Shipper);
+
+    this.host = 'http://ruf:8080';
+    this.uri = uri;
+    this.method = 'GET';
+    this.rsType = rsType;
+
+    this.get = this.get.bind(this);
+    this.post = this.post.bind(this);
+    this.put = this.put.bind(this);
+    this.del = this.del.bind(this);
+    this.setUri = this.setUri.bind(this);
+    this.send = this.send.bind(this);
+  }
+
+  _createClass(Shipper, [{
+    key: 'get',
+    value: function get(data) {
+      this.data = data;
+      return this;
+    }
+  }, {
+    key: 'post',
+    value: function post(data) {
+      this.method = 'POST';
+      this.data = data;
+      return this;
+    }
+  }, {
+    key: 'put',
+    value: function put(data) {
+      this.method = 'PUT';
+      this.data = data;
+      return this;
+    }
+  }, {
+    key: 'del',
+    value: function del() {
+      this.method = 'DELETE';
+      return this;
+    }
+  }, {
+    key: 'setUri',
+    value: function setUri(uri) {
+      this.uri = uri;
+    }
+  }, {
+    key: 'send',
+    value: function send() {
+      var _this = this;
+
+      return new Promise(function (resolve, reject) {
+        var xhr = new XMLHttpRequest();
+        xhr.open(_this.method, _this.host + _this.uri, true);
+        if (_this.rsType) xhr.responseType = _this.rsType;
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onload = function () {
+          if (xhr.status === 200) resolve(xhr.response);else reject();
+        };
+        xhr.send(_this.data);
+      });
+    }
+  }]);
+
+  return Shipper;
+}();
+
+exports.default = Shipper;
+
+},{}],31:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18089,11 +18607,20 @@ var Stat = function (_React$Component) {
   _createClass(Stat, [{
     key: "render",
     value: function render() {
-      var msgContent = this.props.taskLevel ? "The list of task belong to " : "The list of " + this.props.type.toLowerCase() + "s:";
+      var msgContent = this.props.level === 0 ? "The list of " + this.props.type.toLowerCase() + ":" : 'Tasks of ';
+      var supervisor = this.props.level === 1 ? this.props.supervisor : '';
+
       return _react2.default.createElement(
         "p",
         { className: "stat-bar" },
-        msgContent
+        msgContent,
+        _react2.default.createElement(
+          "b",
+          null,
+          " ",
+          supervisor,
+          " "
+        )
       );
     }
   }]);
@@ -18103,7 +18630,7 @@ var Stat = function (_React$Component) {
 
 exports.default = Stat;
 
-},{"react":26}],28:[function(require,module,exports){
+},{"react":26}],32:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18138,7 +18665,7 @@ var Switcher = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var switches = ["Session", "Process"].map(function (label, key) {
+      var switches = ["Season", "Process"].map(function (label, key) {
         var classes = "";
         if (_this2.props.type === label) classes = "active";
         return _react2.default.createElement(
@@ -18163,7 +18690,66 @@ var Switcher = function (_React$Component) {
 
 exports.default = Switcher;
 
-},{"react":26}],29:[function(require,module,exports){
+},{"react":26}],33:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Item = require('./Item.jsx');
+
+var _Item2 = _interopRequireDefault(_Item);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Toc = function (_React$Component) {
+  _inherits(Toc, _React$Component);
+
+  function Toc(props) {
+    _classCallCheck(this, Toc);
+
+    return _possibleConstructorReturn(this, (Toc.__proto__ || Object.getPrototypeOf(Toc)).call(this, props));
+  }
+
+  _createClass(Toc, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var items = this.props.ds.map(function (i) {
+        return _react2.default.createElement(_Item2.default, { key: i.id,
+          info: i,
+          rmFunc: _this2.props.rmFunc,
+          eFunc: _this2.props.eFunc,
+          load: _this2.props.load });
+      });
+      return _react2.default.createElement(
+        'div',
+        { className: 'toc' },
+        items
+      );
+    }
+  }]);
+
+  return Toc;
+}(_react2.default.Component);
+
+exports.default = Toc;
+
+},{"./Item.jsx":29,"react":26}],34:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -18184,7 +18770,25 @@ var _Stat = require('./Stat.jsx');
 
 var _Stat2 = _interopRequireDefault(_Stat);
 
+var _Toc = require('./Toc.jsx');
+
+var _Toc2 = _interopRequireDefault(_Toc);
+
+var _Dialog = require('./Dialog.jsx');
+
+var _Dialog2 = _interopRequireDefault(_Dialog);
+
+var _Foot = require('./Foot.jsx');
+
+var _Foot2 = _interopRequireDefault(_Foot);
+
+var _Shipper = require('./Shipper.jsx');
+
+var _Shipper2 = _interopRequireDefault(_Shipper);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -18201,24 +18805,206 @@ var App = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
     _this.state = {
-      type: "Session",
+      type: "Process",
       cParent: {},
-      taskLevel: 0
+      level: 0,
+      dataSource: [],
+      isDialogOpened: false,
+      holding: [],
+      msg: ''
     };
 
     _this.changedType = _this.changedType.bind(_this);
+    _this.reload = _this.reload.bind(_this);
+    _this.dialogOff = _this.dialogOff.bind(_this);
+    _this.dialogOn = _this.dialogOn.bind(_this);
+    _this.updateItem = _this.updateItem.bind(_this);
+    _this.getCurrentUri = _this.getCurrentUri.bind(_this);
+    _this.rmItem = _this.rmItem.bind(_this);
+    _this.editItem = _this.editItem.bind(_this);
+    _this.loadItem = _this.loadItem.bind(_this);
+    _this.getItem = _this.getItem.bind(_this);
+    _this.exportItem = _this.exportItem.bind(_this);
+    _this.importItem = _this.importItem.bind(_this);
+    _this.importHandler = _this.importHandler.bind(_this);
+    _this.getItemFrame = _this.getItemFrame.bind(_this);
+    _this.back = _this.back.bind(_this);
+    _this.downloadExportedItems = _this.downloadExportedItems.bind(_this);
     return _this;
   }
 
   _createClass(App, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      new _Shipper2.default('/' + this.state.type.toLowerCase()).get().send().then(this.reload);
+    }
+  }, {
     key: 'changedType',
     value: function changedType(newType) {
-      console.log('noticed to: ' + newType);
-      this.setState({ type: newType });
+      if (newType === this.state.type) return;
+      new _Shipper2.default('/' + newType.toLowerCase()).get().send().then(this.reload);
+      this.setState({ type: newType, level: 0 });
+    }
+  }, {
+    key: 'reload',
+    value: function reload(response) {
+      this.setState({ dataSource: JSON.parse(response) });
+    }
+  }, {
+    key: 'dialogOff',
+    value: function dialogOff() {
+      var holded = [];
+      if (this.state.level === 1) holded.push(this.state.holding[0]);
+      this.setState({
+        isDialogOpened: false,
+        holding: holded
+      });
+    }
+  }, {
+    key: 'dialogOn',
+    value: function dialogOn() {
+      this.setState({ isDialogOpened: true });
+    }
+  }, {
+    key: 'updateItem',
+    value: function updateItem(item) {
+      this.dialogOff();
+
+      var reloadRequest = new _Shipper2.default(this.getCurrentUri()).get();
+      var callback = this.reload;
+      var rq = new _Shipper2.default(this.getCurrentUri());
+
+      if (item.id === -1) rq = rq.post(JSON.stringify(item));else rq = rq.put(JSON.stringify(item));
+
+      rq.send().then(function () {
+        reloadRequest.send().then(callback);
+      }, function () {
+        console.log("Item fail to create");
+      });
+    }
+  }, {
+    key: 'getCurrentUri',
+    value: function getCurrentUri(upperLevel) {
+      var uri = '/' + this.state.type.toLowerCase();
+      if (upperLevel) return uri + '/' + this.state.holding[0].id;
+      uri += this.state.level === 1 ? '/' + this.state.holding[0].id + '/task' : '';
+      return uri;
+    }
+  }, {
+    key: 'rmItem',
+    value: function rmItem(id) {
+      var holded = [];
+      this.state.level === 1 && holded.push(this.state.holding[0]);
+      this.setState({ holding: holded });
+      var reload = new _Shipper2.default(this.getCurrentUri()).get();
+      var callback = this.reload;
+      new _Shipper2.default(this.getCurrentUri() + '/' + id).del().send().then(function (response) {
+        reload.send().then(callback);
+      });
+    }
+  }, {
+    key: 'editItem',
+    value: function editItem(id) {
+      var target = this.getItem(id);
+      var holded = [].concat(_toConsumableArray(this.state.holding));
+      holded[this.state.level] = target;
+      this.setState({ isDialogOpened: true, holding: holded });
+    }
+  }, {
+    key: 'loadItem',
+    value: function loadItem(id) {
+      if (this.state.level === 0) {
+        var ds = this.getItem(id);
+        var holded = [ds];
+        this.setState({ level: 1, holding: holded });
+        new _Shipper2.default('/' + this.state.type.toLowerCase() + '/' + id + '/task').get().send().then(this.reload);
+      }
+    }
+  }, {
+    key: 'getItem',
+    value: function getItem(id) {
+      return this.state.dataSource.filter(function (e) {
+        return e.id == id;
+      })[0];
+    }
+  }, {
+    key: 'exportItem',
+    value: function exportItem() {
+      new _Shipper2.default(this.getCurrentUri(true) + '/export', 'blob').post().send().then(this.downloadExportedItems);
+    }
+  }, {
+    key: 'downloadExportedItems',
+    value: function downloadExportedItems(response) {
+      var blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      var url = window.URL.createObjectURL(blob);
+      var a = document.createElement('A');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = 'Process_' + this.state.holding[0].name + '_-_exported.xlsx';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+    }
+  }, {
+    key: 'importItem',
+    value: function importItem() {
+      var i = document.createElement('INPUT');
+      i.type = 'file';
+      i.accept = 'application/vnd.ms-excel' + ',application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+      i.style.display = 'none';
+      document.body.appendChild(i);
+      i.addEventListener('change', this.importHandler);
+      i.click();
+
+      this.setState({ msg: 'import callback' });
+    }
+  }, {
+    key: 'importHandler',
+    value: function importHandler(event) {
+      console.log(event.target.files[0]);
+    }
+  }, {
+    key: 'back',
+    value: function back() {
+      this.setState({ level: 0, holding: [] });
+      new _Shipper2.default('/' + this.state.type.toLowerCase()).get().send().then(this.reload);
+    }
+  }, {
+    key: 'getItemFrame',
+    value: function getItemFrame() {
+      var frame = { id: -1, name: '' };
+      if (this.state.level === 0) {
+        frame.tasks = [];
+      } else {
+        frame.startDate = 0;
+        frame.duration = 0;
+        frame.detail = '';
+        frame.type = {
+          id: 1
+        };
+      }
+      return frame;
+    }
+  }, {
+    key: 'getCurrentItemName',
+    value: function getCurrentItemName() {
+      if (this.state.level === 0) if (this.state.type === 'Seasion') return 'Seasion';else return 'Process';
+      if (this.state.level === 1) if (this.state.type === 'Seasion') return 'Seasion Task';else return 'Process Task';
     }
   }, {
     key: 'render',
     value: function render() {
+      var info;
+
+      if (this.state.holding.length === 0 || !this.state.holding[this.state.level]) info = this.getItemFrame();else info = this.state.holding[this.state.level];
+
+      var dialog = this.state.isDialogOpened ? _react2.default.createElement(_Dialog2.default, { off: this.dialogOff,
+        currentLevel: this.state.level,
+        info: info,
+        type: this.state.type,
+        commitCallBack: this.updateItem }) : '';
+      var itemName = this.getCurrentItemName();
+      var supervisor = this.state.level === 1 ? this.state.holding[0].name : '';
       return _react2.default.createElement(
         'div',
         { className: this.state.type.toLowerCase() },
@@ -18226,7 +19012,20 @@ var App = function (_React$Component) {
           changedType: this.changedType,
           type: this.state.type
         }),
-        _react2.default.createElement(_Stat2.default, { type: this.state.type, taskLevel: this.state.taskLevel })
+        _react2.default.createElement(_Stat2.default, { type: this.state.type,
+          level: this.state.level,
+          supervisor: supervisor }),
+        _react2.default.createElement(_Toc2.default, { ds: this.state.dataSource,
+          rmFunc: this.rmItem,
+          eFunc: this.editItem,
+          load: this.loadItem }),
+        dialog,
+        _react2.default.createElement(_Foot2.default, { dialogOn: this.dialogOn,
+          currentLevel: this.state.level,
+          back: this.back,
+          ex: this.exportItem,
+          im: this.importItem }),
+        this.state.msg
       );
     }
   }]);
@@ -18236,4 +19035,4 @@ var App = function (_React$Component) {
 
 _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('root'));
 
-},{"./Stat.jsx":27,"./Switcher.jsx":28,"react":26,"react-dom":23}]},{},[29]);
+},{"./Dialog.jsx":27,"./Foot.jsx":28,"./Shipper.jsx":30,"./Stat.jsx":31,"./Switcher.jsx":32,"./Toc.jsx":33,"react":26,"react-dom":23}]},{},[34]);

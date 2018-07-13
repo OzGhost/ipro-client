@@ -1,0 +1,88 @@
+@import constant
+
+=btn-holder
+  display: block
+  margin: 0
+  padding: 0
+
+=btn-chain
+  margin: 0
+  padding: $gap-normal
+  display: inline-block
+  float: left
+  border: 0
+  
+
+.single-btn
+  +btn-holder
+
+  button
+    +btn-chain
+    width: 100%
+    float: none
+
+.double-btn
+  +btn-holder
+
+  button
+    +btn-chain
+    width: 50%
+
+.tripple-btn
+  +btn-holder
+
+  button
+    +btn-chain
+    width: 33.33%
+
+.double-double-btn
+  +btn-holder
+
+  button
+    +btn-chain
+    width: 25%
+
+.btn-colorful
+  background-color: $c-cyan
+  color: black
+
+.btn-colorness
+  background-color: $c-skin
+  color: white
+
+.btn-neutrality
+  background-color: $c-lightgrey
+  color: black
+
+.btn-positive
+  background-color: $c-green
+  color: $c-brown
+
+.btn-negative
+  background-color: $c-red
+  color: white
+
+.ib
+  display: block
+  margin: 0
+  padding: $gap-tiny
+  
+  &.double-btn
+    padding-top: 0
+    padding-bottom: 0
+
+  label
+    display: block
+    margin-bottom: $gap-tiny
+    color: $c-darkgrey
+
+  input,
+  select,
+  textarea
+    display: block
+    border: 1px solid $c-grey
+    width: 100%
+    box-sizing: border-box
+    background-color: white
+    padding: $gap-tiny $gap-normal
+

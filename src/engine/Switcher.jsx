@@ -2,7 +2,7 @@ import React from 'react'
 
 export default class Switcher extends React.Component {
   render() {
-    const switches = ["Session", "Process"]
+    const switches = ["Season", "Process"]
       .map((label, key) => {
         let classes = ""
         if (this.props.type === label)

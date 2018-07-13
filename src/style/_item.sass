@@ -1,0 +1,84 @@
+@import constant
+
+=item-part()
+  padding: $gap-normal
+  display: inline-block
+  
+=tripple-dot()
+  border: 1px solid grey
+  border-radius: 50%
+  padding: 2px
+  display: inline-block
+  position: absolute
+  top: -1px
+
+=item-mode-base($color)
+  .item
+    border: 1px solid $color
+
+    .more-opt
+      border-left: 1px dashed $color
+    
+    .hidden-opt
+      button
+        outline: 1px solid $color
+        -moz-outline: 1px solid $color
+
+a.btn
+  text-decoration: none
+  color: $c-blue
+
+.season
+  +item-mode-base($c-green)
+.process
+  +item-mode-base($c-red)
+
+.tripple-dot
+  +tripple-dot()
+  position: relative
+  margin-left: calc(50% - 3px)
+
+  &:before
+    content: ""
+    +tripple-dot()
+    left: -1.2 * $gap-tiny
+
+  &:after
+    content: ""
+    +tripple-dot()
+    right: -1.2 * $gap-tiny
+
+.item
+  margin: $gap-tiny 0
+  position: relative
+
+  .cname
+    +item-part()
+    width: 70%
+
+  .more-opt
+    +item-part()
+    width: 30%
+    position: absolute
+    top: 0
+    right: 0
+
+  .hidden-opt
+    display: none
+
+    button
+      padding: $gap-normal
+      width: 50%
+      border: 0
+    
+    .btn-rm
+      background: $c-red
+      color: white
+
+    .btn-modify
+      background: white
+
+  &.open
+    .hidden-opt
+      display: block
+    

@@ -1,0 +1,21 @@
+@import constant
+
+.switcher-bar
+  width: 100%
+  background: black
+  padding: 0
+  margin: 0
+  button
+    border: 0px
+    padding: $gap-normal
+    text-align: center
+    width: 40%
+    color: white
+    &:first-child
+      background: $c-green
+      color: $c-brown
+    &:last-child
+      background: $c-red
+    &.active
+      width: 60%
+

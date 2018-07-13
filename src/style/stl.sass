@@ -1,55 +1,17 @@
-/* device width */
-$tiny-width: 320px
-$small-width: 760px
-$normal-width: 1020px
-$large-width: 1280px
-
-/* color palette */
-$c-green: #ACF39D
-$c-red: #E85F5C
-$c-cyan: #9CFFF8
-$c-brown: #773344
-$c-skin: #E3B5A4
+@import constant
+@import common
+@import switcher_bar
+@import stat_bar
+@import toc
+@import item
+@import dialog
 
 body
-  font-size: 16px
+  font-size: $fs-normal
   line-height: 1.5
 
 .mobile-mode
   width: $tiny-width
   margin: 10px auto
-  height: 100px
+  position: relative
 
-.session
-  .stat-bar
-    background: $c-green
-    color: $c-brown
-
-.process
-  .stat-bar
-    background: $c-red
-    color: white
-
-.switcher-bar
-  width: 100%
-  background: black
-  padding: 0
-  margin: 0
-  button
-    border: 0px
-    padding: 8px
-    text-align: center
-    width: 40%
-    color: white
-    &:first-child
-      background: $c-green
-      color: $c-brown
-    &:last-child
-      background: $c-red
-    &.active
-      width: 60%
-
-.stat-bar
-  margin: 10px 0
-  padding: 2px 10px
-  font-size: 14px
